@@ -8,7 +8,8 @@ const claudiaConfig = require('./claudia.json'),
 			requestParams = {
 				method: 'POST',
 				headers: headers,
-				mode: 'cors'
+				mode: 'cors',
+				body: JSON.stringify(content)
 			};
 		console.log('sending fetch request');
 		return fetch(`${url}/${endpoint}`, requestParams).then(response => response.text());
@@ -24,7 +25,7 @@ const claudiaConfig = require('./claudia.json'),
 			oReq.addEventListener('abort', reject);
 			oReq.open('POST', `${url}/${endpoint}`);
 			oReq.setRequestHeader('Content-Type', 'application/json');
-			oReq.send();
+			oReq.send(JSON.stringify(content));
 		});
 	};
 
@@ -33,13 +34,13 @@ document.addEventListener('DOMContentLoaded', () => {
 		e.preventDefault();
 		try {
 			const form = e.target,
-				inputFields = Array.from(form.querySelector('input[type=text]')),
+				inputFields = Array.from(form.querySelectorAll('input[type=text]')),
 				resultField = form.querySelector('textarea'),
 				requestTypeXhr = form.querySelector('input[type=radio][value=xhr]'),
 				requestMethod = (requestTypeXhr.checked) ? sendXHRRequest: sendFetchRequest,
 				content = {};
 			inputFields.forEach(field => {
-				content[field.getAttribute['name']] = field.value;
+				content[field.getAttribute('name')] = field.value;
 			});
 			requestMethod('registrants', content)
 				.then(respText => {
