@@ -15,4 +15,4 @@
 
 ## clean up after test
 
-4. `npm run destroy` to remove the API
+* `npm run destroy` to remove the API
