@@ -2,7 +2,9 @@ const claudiaConfig = require('./claudia.json'),
 	region = require('./package.json').config.awsRegion,
 	url = `https://${claudiaConfig.api.id}.execute-api.${region}.amazonaws.com/latest`,
 	sendFetchRequest = function (endpoint, content) {
-		const headers = new Headers(),
+		const headers = new Headers({
+				'Content-Type': 'application/json'
+			}),
 			requestParams = {
 				method: 'POST',
 				headers: headers,
@@ -21,6 +23,7 @@ const claudiaConfig = require('./claudia.json'),
 			oReq.addEventListener('error', reject);
 			oReq.addEventListener('abort', reject);
 			oReq.open('POST', `${url}/${endpoint}`);
+			oReq.setRequestHeader('Content-Type', 'application/json');
 			oReq.send();
 		});
 	};
