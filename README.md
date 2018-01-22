@@ -3,7 +3,7 @@
 ## set up
 
 0. run `npm i` to get the deps
-1. (optional) change region in package.json
+1. (optional) change the region in the `package.json` config section
 2. run `npm run create` to deploy a test lambda
 3. run `npm run serve` to run the web site on port 8080
 4. open http://localhost:8080 -- fill in some data into the form and submit
