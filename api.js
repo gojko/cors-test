@@ -6,4 +6,6 @@ api.post('/registrants', function (request) {
 	return Promise.resolve('');
 }, { success: 201 });
 
+api.corsMaxAge(60);
+
 module.exports = api;
