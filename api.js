@@ -2,10 +2,10 @@ const Api = require('claudia-api-builder'),
 	api = new Api();
 
 api.post('/registrants', function (request) {
-	console.log('received', JSON.stringify(request, null, 2));
-	return Promise.resolve('');
-}, { success: 201 });
+	return request.body;
+});
 
 api.corsMaxAge(60);
+api.corsOrigin('http://localhost:8080')
 
 module.exports = api;
